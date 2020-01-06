@@ -132,3 +132,4 @@ dmypy.json
 data/
 sample files/
 messages/
+metadata.json
