@@ -21,9 +21,7 @@ def cleanEmailString(email):
 
     if( index != -1 ):
         index += 3
-        # print("Replaced " + email)
         email = email[index:]
-        # print("with  " + email)
     return email
 
 users_data = {}
