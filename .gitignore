@@ -134,6 +134,12 @@ sample files/
 messages/
 metadata.json
 
+braggioli/
+daoldold/
+maildir/
+*.zip
+old_msgs/
+
 
 GOTdemo/
 *.zip
