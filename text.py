@@ -96,7 +96,7 @@ f =  json.dumps(users_data,sort_keys=True, indent=4)
 
 
 
-outFile = open("real_output.json", "w")
+outFile = open("updated_metadata.json", "w")
 outFile.write(f)
 outFile.close()
 allPaths.close()

@@ -133,3 +133,10 @@ data/
 sample files/
 messages/
 metadata.json
+
+
+GOTdemo/
+*.zip
+messages_debugging/
+*.json
+email_paths.txt
