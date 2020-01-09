@@ -133,8 +133,16 @@ data/
 sample files/
 messages/
 metadata.json
+
 braggioli/
 daoldold/
 maildir/
 *.zip
 old_msgs/
+
+
+GOTdemo/
+*.zip
+messages_debugging/
+*.json
+email_paths.txt
