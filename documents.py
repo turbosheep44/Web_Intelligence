@@ -54,8 +54,17 @@ with open("edges.json", "w") as output:
 print("\nWriting graph.json")
 with open("graph.json", "w") as output:
     print(json_dumps({
-        "users": [{"id": user_ids[user], "name": user, "contact": data[user]["weight"]}
-                  for user in data],
-        "edges":  [{"source": literal_eval(edge)[0], "target": literal_eval(
-            edge)[1], "weight": len(documents[edge])} for edge in documents]
+        "users": [
+            {
+                "id": user_ids[user],
+                "name": user,
+                "contact": data[user]["weight"]
+            }
+            for user in data],
+        "edges":  [
+            {
+                "source": literal_eval(edge)[0],
+                "target": literal_eval(edge)[1],
+                "weight": len(documents[edge])
+            } for edge in documents]
     }), file=output)
