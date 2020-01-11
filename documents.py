@@ -16,26 +16,12 @@ def intersect(listA, listB):
 with open('metadata.json') as json_file:
     data = load_json(json_file)
 
-# remove all those whose weight is not in the top 150
-# users_to_keep = []
-# for user in data.keys():
-#     position = 0
-#     while position < len(users_to_keep) and data[users_to_keep[position]]["weight"] < data[user]["weight"]:
-#         position += 1
-#     users_to_keep.insert(position, user)
-#     users_to_keep = users_to_keep[-100:]
-
-# filtered_data = {user: data[user] for user in users_to_keep}
-# for x in filtered_data:
-#    print(x, filtered_data[x]["weight"])
-
 # get a list of all the distinct user pairs
 distinct_user_pairs = combinations(list(data.keys()), 2)
 total_user_pairs = sum(1 for _ in combinations(list(data.keys()), 2))
 
 # record a numberical id for each user
-user_ids = {name: index for index,
-            name in enumerate(list(data.keys()))}
+user_ids = {name: name["id"] for name in data}
 
 # for each distinct user pair
 #   one = userA.send intersect userB.received
@@ -61,10 +47,11 @@ for user_pair in distinct_user_pairs:
         documents["(" + str(user_ids[user_pair[0]]) + ", " +
                   str(user_ids[user_pair[1]]) + ")"] = common_emails
 
-print("\noutputting dtaa")
+print("\nWriting edges.json")
 with open("edges.json", "w") as output:
     print(json_dumps(documents), file=output)
 
+print("\nWriting graph.json")
 with open("graph.json", "w") as output:
     print(json_dumps({
         "users": [{"id": user_ids[user], "name": user, "contact": data[user]["weight"]}
