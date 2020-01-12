@@ -84,12 +84,12 @@ def tf_idf(input_file, output_directory, conversion_function, output_file_name_f
 if __name__ == "__main__":
     print("Nodes TF.IDF")
     tf_idf("metadata.json",
-           "tf_idf_nodes/",
+           "output_json/tf_idf_nodes/",
            lambda key, value: (value["id"], set(
                value["sent"] + value["received"])),
            lambda key: key)
     print("Edges TF.IDF")
-    tf_idf("edges.json",
-           "tf_idf_edges/",
+    tf_idf("output_json/edges.json",
+           "output_json/tf_idf_edges/",
            lambda key, value: (frozenset(literal_eval(key)), value),
            lambda key: '_'.join(str(user_id) for user_id in sorted(key)))

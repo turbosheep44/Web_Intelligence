@@ -48,11 +48,11 @@ for user_pair in distinct_user_pairs:
                   str(user_ids[user_pair[1]]) + ")"] = common_emails
 
 print("\nWriting edges.json")
-with open("edges.json", "w") as output:
+with open("output_json/edges.json", "w") as output:
     print(json_dumps(documents), file=output)
 
 print("\nWriting graph.json")
-with open("graph.json", "w") as output:
+with open("output_json/graph.json", "w") as output:
     print(json_dumps({
         "users": [
             {

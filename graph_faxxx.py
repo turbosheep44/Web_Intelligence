@@ -150,7 +150,7 @@ def get_node_data_from_graph(graph):
 
 if __name__ == "__main__":
     # read the metadata json file
-    with open('graph.json') as json_file:
+    with open('output_json/graph.json') as json_file:
         graph = load_json(json_file)
 
     # perform conversions to edges = { tuple(id, id) : weight } and get node_count
@@ -184,18 +184,18 @@ if __name__ == "__main__":
         global_clustering_coefficient(node_count, adjacency_list)
 
     # output graph stuff to file
-    with open(f"graph_stats.json", "w") as outputFile:
+    with open(f"output_json/graph_stats.json", "w") as outputFile:
         print(json_dumps(graph_stats), file=outputFile)
 
     # create the output dir if it does not exist
-    if not path.exists("node_data/"):
+    if not path.exists("output_json/node_data/"):
         try:
-            makedirs(path.dirname("node_data/"))
+            makedirs(path.dirname("output_json/node_data/"))
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
 
     # output the node data to files
     for node_id in node_data:
-        with open(f"node_data/{node_id}.json", "w") as outputFile:
+        with open(f"output_json/node_data/{node_id}.json", "w") as outputFile:
             print(json_dumps(node_data[node_id]), file=outputFile)
