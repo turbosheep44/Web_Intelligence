@@ -21,7 +21,7 @@ distinct_user_pairs = combinations(list(data.keys()), 2)
 total_user_pairs = sum(1 for _ in combinations(list(data.keys()), 2))
 
 # record a numberical id for each user
-user_ids = {name: name["id"] for name in data}
+user_ids = {name: data[name]["id"] for name in data}
 
 # for each distinct user pair
 #   one = userA.send intersect userB.received
