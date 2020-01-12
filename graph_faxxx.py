@@ -57,6 +57,8 @@ def floyd_warshall(node_count, adjacency_list):
     #             counter += 1
     # print(f"# of people [{counter/2}]")
 
+    return diameter, average_path_length
+
 
 def local_clustering_cofficient(node_index, adjacency_list):
     # get the neighbour node list
@@ -156,6 +158,9 @@ if __name__ == "__main__":
     node_count = len(graph["users"])
 
     # graph size
+    graph_stats = {}
+    graph_stats["node_count"] = node_count
+    graph_stats["edge_count"] = len(edges)
     print(f"Nodes  [{node_count}]")
     print(f"Edges  [{len(edges)}]")
 
@@ -171,9 +176,15 @@ if __name__ == "__main__":
     del edges
     del graph
 
-    # get fgraph facts
-    floyd_warshall(node_count, adjacency_list)
-    global_clustering_coefficient(node_count, adjacency_list)
+    # get the graph facts
+    graph_stats["diameter"], graph_stats["average_path_length"] = \
+        floyd_warshall(node_count, adjacency_list)
+    graph_stats["global_clustering_coefficient"] = \
+        global_clustering_coefficient(node_count, adjacency_list)
+
+    # output graph stuff to file
+    with open(f"graph_stats.json", "w") as outputFile:
+        print(json_dumps(graph_stats), file=outputFile)
 
     # output the node data to files
     for node_id in node_data:
