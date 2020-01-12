@@ -42,16 +42,16 @@ def parseSaveMessage(path, emailCounter):
                 toEmail = toEmailAdder(headerLine)
                 
         refName = path.replace("/", "") + "H"
-        """
         
-        saveFile = open('messages_debugging/'+ refName, 'w')
+        
+        saveFile = open('messages100/'+ refName, 'w')
         message = data.replace('\n',  ' ')
         parsed_msg = message.lower().translate(str.maketrans('', '', string.punctuation))
         parsed_msg = re.sub('\s+',' ',parsed_msg)
 
         saveFile.write(parsed_msg)
         saveFile.close()
-        """
+        
         #first we will save the file
         
         if( fromEmail not in users_data ):
@@ -93,8 +93,6 @@ for  person in users_data:
     users_data[person]["weight"] = len(users_data[person]["sent"]) + len(users_data[person]["received"])
 
 f =  json.dumps(users_data,sort_keys=True, indent=4)
-
-
 
 outFile = open("updated_metadata.json", "w")
 outFile.write(f)
