@@ -2,6 +2,7 @@ from json import load as load_json
 from json import dumps as json_dumps
 from ast import literal_eval
 from math import inf
+from os import makedirs, path
 
 
 # using floyd warshall's algorithm to get the shortest path between all nodes
@@ -185,6 +186,14 @@ if __name__ == "__main__":
     # output graph stuff to file
     with open(f"graph_stats.json", "w") as outputFile:
         print(json_dumps(graph_stats), file=outputFile)
+
+    # create the output dir if it does not exist
+    if not path.exists("node_data/"):
+        try:
+            makedirs(path.dirname("node_data/"))
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
 
     # output the node data to files
     for node_id in node_data:
