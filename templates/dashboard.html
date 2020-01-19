@@ -19,37 +19,127 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <script src="{{ url_for('static', filename="js/main.js")}}"></script>
+
+    <script src="{{ url_for('static', filename='js/d3.min.js')}}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+
+
+
     <link rel="stylesheet" href="{{ url_for('static', filename="css/main.css")}}">
 </head>
 
 <body>
+    <style>
+        body {
+            font: Arial 12px;
+            text-align: center;
+        }
+
+        .link {
+            stroke: rgba(204, 204, 204, 0.360);
+
+        }
+        
+
+        .node text {
+            pointer-events: none;
+            font: sans-serif;
+        }
+
+        #userDetails {
+            bottom: 0;
+            right: 0;
+            margin: 0px 15px 15px 10px;
+            width: 15vw;
+            z-index: 5;
+            position: fixed;
+        }
+
+        #graphDetails {
+            top: 0;
+            right: 0;
+            margin: 0px 15px 15px 10px;
+            width: 15vw;
+            z-index: 4;
+            position: fixed;
+        }
+
+        #getReq{
+            width:100%; 
+            height: 100%;
+            background-color:#1a2433; 
+            color: white;
+        } 
+
+        .list-group{
+            text-align: left;
+        }
+
+        #mainPage{
+            width:100%; 
+            height: 100%;
+            background-color:#1a2433; 
+            color: white;
+        }
+    </style>
+
+
     <div id="myCarousel" class="carousel slide" data-interval="false">
         <div class="carousel-inner">
-            <div class="carousel-item active text-center">
-                <div class="d-flex h-100 align-items-center justify-content-center front-page">
 
+            <div id="mainPage" class="carousel-item text-center active">
+                <div class="d-flex h-100 align-items-center justify-content-center" >
                     <div>
-
                         <h1><b>Web Intelligence</b></h1> <br />
-                        <h2>Matthew Axisa, Gabriele Borg</h2> <br />
-                        <h4>Michael Pulis</h4>
+                        <h2>Michael Pulis, Matthew Axisa, Gabriele Borg</h2> <br />
 
                     </div>
 
                 </div>
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100"
-                    src="https://media.swncdn.com/cms/CCOM/63773-24729767024b661c1224cz.1200w.tn.jpg"
-                    alt="Second slide">
+
+
+            <div id="getReq" class="carousel-item" >
+                <script src="{{ url_for('static', filename='js/graph.js')}}"></script>
+
+                <div class="card" id="graphDetails" style = "color: black;">
+                    <div class="card-header">
+                        Features
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="node_count"></li>
+                        <li class="list-group-item" id="edge_count"></li>
+                        <li class="list-group-item" id="diameter"></li>
+                        <li class="list-group-item" id="average_path_length"></li>
+                        <li class="list-group-item" id="global_clustering_coefficient"></li>
+                    </ul>
+                </div>
+
+                <div class="card" id="userDetails" style = "color: black;">
+                    <div class="card-header">
+                        Features
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="name"></li>
+                        <li class="list-group-item" id="weight"></li>
+                        <li class="list-group-item" id="neighbour_count"></li>
+                        <li class="list-group-item" id="clustering_coefficient"></li>
+                        <li class="list-group-item" id="eccentricity"></li>
+                        <li class="list-group-item" id="average_path_distance"></li>
+                    </ul>
+                </div>
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100"
-                    src="https://media.swncdn.com/cms/CCOM/63773-24729767024b661c1224cz.1200w.tn.jpg" alt="Third slide">
+
+            <div id="showEdges" class="carousel-item" style = "background-color:#1a2433; color: white; text-align: center;">
+                <iframe id="iframe" width="100%" height="100%" src="KeywordCloud"></iframe>
+                
             </div>
+            </div>
+
+
         </div>
-        <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </a>
@@ -57,6 +147,7 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
+    <script src="{{ url_for('static', filename='js/loadEdgeData.js') }}"></script>
 </body>
 
 </html>

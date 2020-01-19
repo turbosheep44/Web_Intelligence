@@ -132,4 +132,15 @@ dmypy.json
 data/
 sample files/
 messages/
+
 *.json
+maildir/
+*.zip
+old_msgs/
+
+
+GOTdemo/
+*.zip
+messages_debugging/
+*.json
+email_paths.txt
