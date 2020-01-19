@@ -132,10 +132,8 @@ dmypy.json
 data/
 sample files/
 messages/
-metadata.json
 
-braggioli/
-daoldold/
+*.json
 maildir/
 *.zip
 old_msgs/
