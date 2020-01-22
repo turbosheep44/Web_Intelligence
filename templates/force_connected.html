@@ -43,7 +43,6 @@
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 			
-console.log(svgElement);
 		//Load External Data
 		d3.json("exj", function (dataset) {
 			//Extract data from dataset into arrays
@@ -52,7 +51,6 @@ console.log(svgElement);
 
 				
 				console.log(nodes);
-    console.log(dataset)
 
 			//Create Force Layout
 			var force = d3.layout.force()

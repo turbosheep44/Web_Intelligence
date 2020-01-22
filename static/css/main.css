@@ -6,6 +6,54 @@
     overflow: hidden;
 }
 
-.front-page {
-    background-color: grey;
+body {
+    color: white;
+    font: Arial 12px;
+    text-align: center;
+    background-color: #22262e!important; 
+}
+
+.link {
+    stroke: rgba(204, 204, 204, 0.360);
+}
+        
+
+.node text {
+    pointer-events: none;
+    font: sans-serif;
+}
+
+#userDetails {
+    bottom: 0;
+    right: 0;
+    margin: 0px 15px 15px 10px;
+    width: 15vw;
+    z-index: 5;
+    position: fixed;
+}
+
+#graphDetails {
+    top: 0;
+    right: 0;
+    margin: 0px 15px 15px 10px;
+    width: 15vw;
+    z-index: 4;
+    position: fixed;
+}
+
+#getReq{
+    width:100%; 
+    height: 100%;
+} 
+
+.list-group{
+    text-align: left;
+}
+
+.legend {
+    border: 1px solid #555555;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 0.8em;
+    margin: 10px;
+    padding: 8px;
 }

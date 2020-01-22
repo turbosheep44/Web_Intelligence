@@ -1,10 +1,14 @@
 
 // console.log('aw bitch',d3.select('getReq'))
-var graphSelection = d3.select("#getReq").append("svg").attr("width", document.body.clientWidth).attr("height", document.body.clientHeight).append("g")
-    .attr("transform", "translate(" + -200 + "," + 10 + ")");
+var graphSelection = d3.select("#getReq").append("svg")
+    .attr("width", document.body.clientWidth)
+    .attr("height", document.body.clientHeight)
+    .call(d3.behavior.zoom().scaleExtent([0.5, 4]).on("zoom", function () {
+        graphSelection.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
+    })).append("g");
 
 
-var c10 = d3.scale.category10();
+var c10 = d3.scale.category20b();
 
 d3.json("graphStats", function (dataset) {
     document.getElementById("node_count").innerHTML  ="Node Count: " + dataset.node_count;
@@ -13,6 +17,7 @@ d3.json("graphStats", function (dataset) {
     document.getElementById("average_path_length").innerHTML  = "Average Path Length: " + dataset.average_path_length;
     document.getElementById("global_clustering_coefficient").innerHTML  = "Global Clustering Coefficient: " + dataset.global_clustering_coefficient;
 });
+
 
 
 // load data nto arrays from email.json
@@ -38,16 +43,19 @@ d3.json("j", function (dataset) {
                 document.getElementById('iframe').setAttribute('src',"edge?source="+Math.min(firstId, secondId) + '&target=' + Math.max(firstId, secondId) + '&sourceName=' + firstPersonName + "&targetName="+secondPersonName)   
         });
     }).on("mouseover", function () {
-        d3.select(this).attr("stroke-width", 10).attr("stroke-opacity", 1)
+        d3.select(this).transition()
+				   .duration(50).attr("stroke-width", 10).attr("stroke-opacity", 1)
        
     }).on("mouseout", function () {
-        d3.select(this).attr("stroke-width", function (d) { return Math.pow(d.weight,1/3)*1.1 > 10 ? Math.pow(d.weight,1/3)*1.1 : 0.5})
+        d3.select(this).transition()
+				   .duration(200).attr("stroke-width", function (d) { return Math.pow(d.weight,1/3)*1.1 > 10 ? Math.pow(d.weight,1/3)*1.1 : 0.5})
        
     }); //can be dragged; //making it part of the class link
 
+
     var nodes = graphSelection.selectAll(".node").data(users).enter().append("g").attr("class", "nodes").call(force.drag)
     .on("mouseover", function (d) {
-        d3.json("details?link="+d.id, function (details) {
+         d3.json("details?link="+d.id, function (details) {
             // alert(JSON.stringify(details))
             document.getElementById("name").innerHTML  ="Email: " + details.name;
             document.getElementById("weight").innerHTML  = "Weight: " +details.weight;
@@ -58,22 +66,30 @@ d3.json("j", function (dataset) {
         });
     })
     .on("click",function(d){
-        
         nodeId = d.id
         console.log( nodeId ,d.id);
         $('.carousel').carousel(2); 
             document.getElementById('iframe').setAttribute('src',"node?id="+nodeId + '&nodeName='+d.name) 
-              
-            
     })
+
 
     function fmpurl() {
         var url = '/';
         window.location = url;
     }
 
+
     colour_index = 0;
-    var circle = nodes.append("circle").attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5) }).attr("fill", function (_) { colour_index++; return c10(colour_index % 10); });;
+    var circle = nodes.append("circle").attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5) }).attr("fill", function (_) { colour_index++; return c10(colour_index % 20); })
+    .on("mouseover", function (d) {
+        d3.select(this).transition()
+				   .duration(500).attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5)*1.5 });
+       
+    }).on("mouseout", function () {
+        d3.select(this).transition()
+				   .duration(500).attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5) })
+       
+    });
 
     
     var label = nodes.append("text").attr("dx", 12).attr("dy", "0.75em").style("fill", "white").attr("font-size", function (d) { return Math.log(d.contact) * 2 }).text(function (d) { return d.name; });
