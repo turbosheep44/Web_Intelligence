@@ -1,5 +1,6 @@
 
-// console.log('aw bitch',d3.select('getReq'))
+
+
 var graphSelection = d3.select("#getReq").append("svg").attr("width", document.body.clientWidth).attr("height", document.body.clientHeight).append("g")
     .attr("transform", "translate(" + -200 + "," + 10 + ")");
 
@@ -14,14 +15,10 @@ d3.json("graphStats", function (dataset) {
     document.getElementById("global_clustering_coefficient").innerHTML = "Global Clustering Coefficient: " + dataset.global_clustering_coefficient;
 });
 
-
 // load data nto arrays from email.json
-d3.json("j", function (dataset) {
+    d3.json("j", function (dataset) {
     var users = dataset.users,
         edges = dataset.edges;
-
-    console.log(users);
-    console.log(dataset);
 
     var force = d3.layout.force().size([document.body.clientWidth, document.body.clientHeight]).nodes(users).links(edges).gravity(1).charge(-7000).linkDistance(200);
 

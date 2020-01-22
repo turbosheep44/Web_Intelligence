@@ -2,9 +2,28 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/' , methods=['POST'])
+def dashboardPost():
+    global pathModifier
+    postRequest = request.form
+    source = postRequest['source']
+    print ("received: " + source)
+
+    if source == 'big':
+        pathModifier = 'output_json_big/'
+        active="big"
+    else:
+        print("hellooo im doing this this this this")
+        pathModifier = 'output_json_filter/'
+        print(pathModifier)
+        active="small"
+
+    return render_template("dashboard.html", active=active)
+
+@app.route('/' )
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", active="small")
+
 
 @app.route('/node', methods=['GET'] )
 def getNode():
@@ -13,7 +32,6 @@ def getNode():
 
     json_path = "tfidfNode?id=" + nodeId 
     return render_template('keywordCloud.html', json_path = json_path, nodeName = nodeName, nodeId = nodeId )
-    # return app.send_static_file('tf_idf/'+source + '_' + target +'.json')
 
 
 @app.route('/edge', methods=['GET'] )
@@ -25,30 +43,32 @@ def getEdge():
     json_path = "tfidfEdge?source=" + source + "&target="+target
     return render_template('keywordCloud.html', json_path = json_path, sourceName=sourceName, targetName=targetName)
 
+@app.route('/smallLoad')
+def smallLoad():
+    return app.send_static_file('output_json_filter/graph.json')
 
-@app.route('/g')
-def g():
-    return render_template("web.html")
+@app.route('/bigLoad')
+def bigLoad():
+    return app.send_static_file('output_json_big/graph.json')
 
 
 @app.route('/j')
-def root():
-    return app.send_static_file('graph.json')
+def j():
+    return app.send_static_file(pathModifier + 'graph.json')
 
 @app.route('/graphStats')
 def rootStats():
-    return app.send_static_file('graph_stats.json')
+    return app.send_static_file(pathModifier + 'graph_stats.json')
 
 @app.route('/details', methods=['GET'] ) 
 def rootdeatails():
     file_id = request.args.get('link')
-    # with ope')
-    return app.send_static_file('node_data/'+file_id+'.json')
+    return app.send_static_file(pathModifier+ 'node_data/'+file_id+'.json')
 
 
 @app.route('/d')
 def rootd():
-    return app.send_static_file('details.json')
+    return app.send_static_file(pathModifier+ 'details.json')
 
 
 @app.route('/ex')
@@ -57,20 +77,29 @@ def ex():
 
 @app.route('/exj')
 def aaa():
-    return app.send_static_file('got_social_graph.json')
+    return app.send_static_file(pathModifier + 'got_social_graph.json')
     
 
 @app.route('/tfidfEdge', methods=['GET'])
 def mroot():
     source = request.args.get('source')
     target = request.args.get('target')
-    return app.send_static_file('tf_idf_edges/'+source + '_' + target +'.json')
+    return app.send_static_file(pathModifier+ 'tf_idf_edges/'+source + '_' + target +'.json')
 
     
 @app.route('/tfidfNode', methods=['GET'])
 def noderoot():
     nodeId = request.args.get('id')
-    return app.send_static_file('tf_idf_nodes/'+nodeId+'.json')
+    return app.send_static_file(pathModifier+ 'tf_idf_nodes/'+nodeId+'.json')
+
+
+
+@app.after_request
+def add_header(r):
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, 'public, max-age=0'"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    return r
 
 if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = True
