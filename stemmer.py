@@ -1,32 +1,37 @@
 from stemming.porter2 import stem
 import re
+import os
+from os import listdir
+from os.path import isfile, join
+
 stopList = {}
 with open("stopwords.txt" , "r") as stopListLines:
     for line in stopListLines:
         stopList[line.strip()] = 0
 
-print(stopList)
-def removeStopwordsAndStem(file):
+def removeStopwordsAndStem(rootDir,file):
     output = ""
-    with open(file , "r+") as fileRead:
+    with open(rootDir+file , "r+") as fileRead:
         for line in fileRead:
             words = line.split()
             for word in words:
-                if(word not in stopList):
+                if(word not in stopList and '@' not in word and '*' not in word and '\'' not in word and '/' not in word):
                     ts = re.sub("[^ A-Za-z]", "", word)
                     if(len(ts) > 0 ):
                         output += str(stem(ts)) + " "
-        fileRead.seek(0)
-        fileRead.write(output)
-        fileRead.truncate()
+                
+        fileOut = open ('anotherStemmer2/'+file, 'w+')
+        fileOut.write(output)
+        fileOut.close()
+
  
-with open("email_paths.txt", "r") as allLines:
-    counter = 0
-    for line in allLines:
-        
-        h = line.replace("/", "").replace("\n", "") + "H"
-        removeStopwordsAndStem("messages/"+h)
-        print("File No + " + str(counter))
-        counter += 1
+lines = os.listdir("all_Test/")
+counter = 0
+for line in lines:
+    h = line.replace("/", "").replace("\n", "")
+    removeStopwordsAndStem("all_Test/",h)
+    print("File No + " + str(counter))
+    counter += 1
+
         
  
