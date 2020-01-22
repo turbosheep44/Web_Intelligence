@@ -20,18 +20,20 @@ def removeStopwordsAndStem(rootDir,file):
                     if(len(ts) > 0 ):
                         output += str(stem(ts)) + " "
                 
-        fileOut = open ('anotherStemmer2/'+file, 'w+')
+        fileOut = open ('output_dir/'+file, 'w+')
         fileOut.write(output)
         fileOut.close()
 
  
-lines = os.listdir("all_Test/")
+lines = os.listdir("input_dir/")
 counter = 0
 for line in lines:
     h = line.replace("/", "").replace("\n", "")
-    removeStopwordsAndStem("all_Test/",h)
+    removeStopwordsAndStem("input_dir/",h)
     print("File No + " + str(counter))
     counter += 1
 
         
- 
+ #needs params
+#  argument for input directory
+#  argument for output directory

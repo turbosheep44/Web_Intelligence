@@ -1,11 +1,9 @@
 
-// console.log('aw bitch',d3.select('getReq'))
-var graphSelection = d3.select("#getReq").append("svg")
-    .attr("width", document.body.clientWidth)
-    .attr("height", document.body.clientHeight)
-    .call(d3.behavior.zoom().scaleExtent([0.5, 4]).on("zoom", function () {
-        graphSelection.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
-    })).append("g");
+
+
+var graphSelection = d3.select("#getReq").append("svg").attr("width", document.body.clientWidth).attr("height", document.body.clientHeight).append("g")
+    .attr("transform", "translate(" + -200 + "," + 10 + ")");
+
 
 
 var c10 = d3.scale.category20b();
@@ -19,14 +17,10 @@ d3.json("graphStats", function (dataset) {
 });
 
 
-
 // load data nto arrays from email.json
-d3.json("j", function (dataset) {
+    d3.json("j", function (dataset) {
     var users = dataset.users,
         edges = dataset.edges;
-
-    console.log(users);
-    console.log(dataset);
 
     var force = d3.layout.force().size([document.body.clientWidth, document.body.clientHeight]).nodes(users).links(edges).gravity(1).charge(-7000).linkDistance(200);
 

@@ -33,7 +33,6 @@ def parseSaveMessage(path, emailCounter):
         #converting tabs separated emails into a single line
         headerClean = re.sub('([\s]*\n\t)', ' ', inputFile[0] )
 
-        #TO:DO change vriable la name
         for headerLine in headerClean.split("\n"):
             if(headerLine.startswith("From:")):
                 fromEmail = headerLine.split(" ")[1]
@@ -42,7 +41,7 @@ def parseSaveMessage(path, emailCounter):
                 
         refName = path.replace("/", "") + "H"
         
-        saveFile = open('all_Test/'+ refName, 'w')
+        saveFile = open('largeUnstemmed/'+ refName, 'w')
         message = data.replace('\n',  ' ')
         parsed_msg = message.lower()
         parsed_msg = re.sub('\s+',' ',parsed_msg)
@@ -92,7 +91,7 @@ for  person in users_data:
 
 f =  json.dumps(users_data,sort_keys=True, indent=4)
 
-outFile = open("updated_metadata.json", "w")
+outFile = open("original_metadata_big.json", "w")
 outFile.write(f)
 outFile.close()
 allPaths.close()
