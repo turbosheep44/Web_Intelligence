@@ -132,9 +132,9 @@ dmypy.json
 data/
 sample files/
 messages/
-metadata.json
-braggioli/
-daoldold/
+messages_fancy_filter/
+
+*.json
 maildir/
 *.zip
 old_msgs/
@@ -147,3 +147,10 @@ anotherStemmer/
 anotherStemmer2/
 
 *.json
+
+
+GOTdemo/
+*.zip
+messages_debugging/
+*.json
+email_paths.txt
