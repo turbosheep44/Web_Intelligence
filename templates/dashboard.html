@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Dashboard</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    
+
     <script src="https://d3js.org/d3.v3.min.js"></script>
 
     <link rel="stylesheet" href="main.css">
@@ -36,13 +36,13 @@
 </head>
 
 <body>
-   
+
 
     <div id="myCarousel" class="carousel slide" data-interval="false">
         <div class="carousel-inner">
 
             <div id="mainPage" class="carousel-item text-center active">
-                <div class="d-flex h-100 align-items-center justify-content-center" >
+                <div class="d-flex h-100 align-items-center justify-content-center">
                     <div>
                         <h1><b>Web Intelligence</b></h1> <br />
                         <h2>Michael Pulis, Matthew Axisa, Gabriele Borg</h2> <br />
@@ -53,10 +53,10 @@
             </div>
 
 
-            <div id="getReq" class="carousel-item" >
+            <div id="getReq" class="carousel-item">
                 <script src="{{ url_for('static', filename='js/graph.js')}}"></script>
 
-                <div class="card" id="graphDetails" style = "color: black;">
+                <div class="card" id="graphDetails" style="color: black;">
                     <div class="card-header">
                         Features
                     </div>
@@ -69,7 +69,7 @@
                     </ul>
                 </div>
 
-                <div class="card" id="userDetails" style = "color: black;">
+                <div class="card" id="userDetails" style="color: black;">
                     <div class="card-header">
                         Features
                     </div>
@@ -80,25 +80,28 @@
                         <li class="list-group-item" id="clustering_coefficient"></li>
                         <li class="list-group-item" id="eccentricity"></li>
                         <li class="list-group-item" id="average_path_distance"></li>
+                        <li class="list-group-item" id="page_rank"></li>
                     </ul>
                 </div>
             </div>
 
-            <div id="showEdges" class="carousel-item" style = "background-color: #22262e;  color: white; text-align: center;">
+            <div id="showEdges" class="carousel-item"
+                style="background-color: #22262e;  color: white; text-align: center;">
 
-                    <iframe id="iframe" width="100%" height="100%" src="\placeholder"></iframe>
-                
+                <iframe id="iframe" width="100%" height="100%" src="\placeholder"></iframe>
+
             </div>
-            </div>
-
-
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
+    </div>
+
+
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
     </div>
     <script src="{{ url_for('static', filename='js/loadEdgeData.js') }}"></script>
 </body>
