@@ -64,7 +64,7 @@ def floyd_warshall(node_count, adjacency_list):
 
 def local_clustering_cofficient(node_index, adjacency_list):
     # get the neighbour node list
-    neighbours = set(adjacency_list[node_index].keys())
+    neighbours = adjacency_list[node_index]
     node_data[node_index]["neighbours"] = len(neighbours)
 
     # if the degree of this vertex is not > 1 then the clustering coefficient is undefined
@@ -82,7 +82,7 @@ def local_clustering_cofficient(node_index, adjacency_list):
         for other_neighbour in neighbours:
             if other_neighbour in adjacency_list[neighbour]:
                 neighbour_edges += 1
-    # divide by 2 (dont count duplicates)
+    # divide by 2 (dont count duplicates since graph is undirected)
     neighbour_edges /= 2
 
     # print(f"Neighbours {neighbours}")
@@ -129,15 +129,13 @@ def global_clustering_coefficient(node_count, adjacency_list):
 
 
 # creates an adjacancy list for the given graph
-def construct_adjacency_list(edges):
+def construct_adjacency_list(edges, node_count):
     # make an adjacency matrix of the correct size
     # (using dictionaries for constant lookup time)
-    adjacency_list = {}
+    adjacency_list = {i: set() for i in range(node_count)}
     for edge in edges:
-        adjacency_list[edge[0]] = adjacency_list.get(edge[0], {})
-        adjacency_list[edge[0]][edge[1]] = edges[edge]
-        adjacency_list[edge[1]] = adjacency_list.get(edge[1], {})
-        adjacency_list[edge[1]][edge[0]] = edges[edge]
+        adjacency_list[edge[0]].add(edge[1])
+        adjacency_list[edge[1]].add(edge[0])
 
     return adjacency_list
 
@@ -174,7 +172,7 @@ if __name__ == "__main__":
     get_node_data_from_graph(graph)
 
     # create adjacency list and release memory which is no longer required
-    adjacency_list = construct_adjacency_list(edges)
+    adjacency_list = construct_adjacency_list(edges, node_count)
     del edges
     del graph
 
