@@ -25,7 +25,7 @@ for person in data:
         # does 'person' reference 'other_person'?
         # i.e. did 'person' send an email to 'other_person'
         person_sent_set = set(data[person]["sent"])
-        if sum(1 for received in data[other_person]["received"]
+        if any(True for received in data[other_person]["received"]
                if received in person_sent_set):
             # if there was a reference then set this value to 1
             reference_matrix[data[other_person]["id"]][data[person]["id"]] = 1
@@ -46,14 +46,11 @@ for column in range(size):
                 reference_matrix[index][column] = 1/column_total
 
 
-# print_m(reference_matrix)
-# exit()
-
 # create the rank matrix
 rank = [1/size for _ in range(size)]
 
 # pagerank time
-for iteration_count in range(2500):
+for iteration_count in range(2000):
     # reset rank column vector
     new_rank = list(range(size))
 
@@ -71,7 +68,7 @@ for iteration_count in range(2500):
     # set the new rank
     rank = new_rank
 
-    if rank_delta < 0.000000001:
+    if rank_delta < 0.0000000001:
         print(f"Finished after [{iteration_count}] iterations")
         break
     # print(f"\n--------------{rank_delta}---------------\n")
