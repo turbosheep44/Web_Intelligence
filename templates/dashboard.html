@@ -41,7 +41,7 @@
             stroke: rgba(204, 204, 204, 0.360);
 
         }
-        
+
 
         .node text {
             pointer-events: none;
@@ -51,7 +51,7 @@
         #userDetails {
             bottom: 0;
             right: 0;
-            margin: 0px 15px 15px 10px;
+            margin: 1% 7% 1% 10px;
             width: 15vw;
             z-index: 5;
             position: fixed;
@@ -60,28 +60,34 @@
         #graphDetails {
             top: 0;
             right: 0;
-            margin: 0px 15px 15px 10px;
+            margin: 1% 7% 1% 10px;
             width: 15vw;
             z-index: 4;
             position: fixed;
         }
 
-        #getReq{
-            width:100%; 
+        #getReq {
+            width: 100%;
             height: 100%;
-            background-color:#1a2433; 
+            background-color: #1a2433;
             color: white;
-        } 
+        }
 
-        .list-group{
+        .list-group {
             text-align: left;
         }
 
-        #mainPage{
-            width:100%; 
+        #mainPage {
+            width: 100%;
             height: 100%;
-            background-color:#1a2433; 
+            background-color: #1a2433;
             color: white;
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            background-color: black;
+            WIDTH: 4%;
         }
     </style>
 
@@ -90,7 +96,7 @@
         <div class="carousel-inner">
 
             <div id="mainPage" class="carousel-item text-center active">
-                <div class="d-flex h-100 align-items-center justify-content-center" >
+                <div class="d-flex h-100 align-items-center justify-content-center">
                     <div>
                         <h1><b>Web Intelligence</b></h1> <br />
                         <h2>Michael Pulis, Matthew Axisa, Gabriele Borg</h2> <br />
@@ -101,10 +107,10 @@
             </div>
 
 
-            <div id="getReq" class="carousel-item" >
+            <div id="getReq" class="carousel-item">
                 <script src="{{ url_for('static', filename='js/graph.js')}}"></script>
 
-                <div class="card" id="graphDetails" style = "color: black;">
+                <div class="card" id="graphDetails" style="color: black;">
                     <div class="card-header">
                         Features
                     </div>
@@ -117,7 +123,7 @@
                     </ul>
                 </div>
 
-                <div class="card" id="userDetails" style = "color: black;">
+                <div class="card" id="userDetails" style="color: black;">
                     <div class="card-header">
                         Features
                     </div>
@@ -128,24 +134,26 @@
                         <li class="list-group-item" id="clustering_coefficient"></li>
                         <li class="list-group-item" id="eccentricity"></li>
                         <li class="list-group-item" id="average_path_distance"></li>
+                        <li class="list-group-item" id="page_rank"></li>
                     </ul>
                 </div>
             </div>
 
-            <div id="showEdges" class="carousel-item" style = "background-color:#1a2433; color: white; text-align: center;">
+            <div id="showEdges" class="carousel-item"
+                style="background-color:#1a2433; color: white; text-align: center;">
                 <iframe id="iframe" width="100%" height="100%" src="KeywordCloud"></iframe>
-                
-            </div>
-            </div>
 
-
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
+
+
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
     </div>
     <script src="{{ url_for('static', filename='js/loadEdgeData.js') }}"></script>
 </body>

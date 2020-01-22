@@ -34,8 +34,9 @@ def floyd_warshall(node_count, adjacency_list):
     for node in range(node_count):
         eccentricity = max(distance_matrix[node])
         if eccentricity == inf:
-            print(f"[{node}] is not fully connected [{distance_matrix[node]}]")
-            print("FAIL! GRAPH IS NOT CONNECTED!")
+            if sum(1 for i in distance_matrix[node] if i == inf) > 1:
+                print(f"[{node}] is not fully connected [{distance_matrix[node]}]")
+                print("FAIL! GRAPH IS NOT CONNECTED!")
         node_data[node]["eccentricity"] = eccentricity
         node_data[node]["average_path_distance"] = sum(
             distance_matrix[node]) / len(distance_matrix[node])

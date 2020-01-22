@@ -29,7 +29,6 @@ def document_tf_idf(term_by_document_matrix, document):
 
     # filter the top values
     number_of_terms_to_keep = -1 * min(50, int(log(len(tf_idf_dict), 1.2)))
-    print(number_of_terms_to_keep)
 
     tf_idf_dict = [
         # construct a new list from the sorted list

@@ -12,8 +12,8 @@
 <style>
     body {
         font-family: "Lucida Grande", "Droid Sans", Arial, Helvetica, sans-serif;
-        text-align:center;
-       background-color:#1a2433;
+        text-align: center;
+        background-color: #1a2433;
     }
 
     .legend {
@@ -27,54 +27,61 @@
     .bld {
         font-weight: bold;
     }
-    svg{
-        margin-top: 10%;
+
+    svg {
+        margin-top: 5%;
     }
 
     #userDetails {
         bottom: 0;
         right: 0;
-        margin: 0px 15px 15px 10px;
+        margin: 1% 7% 1% 10px;
         width: 15vw;
         z-index: 5;
         position: fixed;
     }
-    .list-group{
-         text-align: left;
+
+    .list-group {
+        text-align: left;
+    }
+
+    #myheader {
+        margin-top: 1%;
     }
 </style>
 
 <body>
-    <h1 id = 'myheader' style="color:white">
+    <h1 id='myheader' style="color:white">
         {% if json_path %}
-            {% if sourceName %}
-                Viewing edge between {{ sourceName }} and {{ targetName }}
-            {% elif nodeName %}
-                Viewing {{ nodeName }}
-            {% else %}
-                Interact with graph to view statistics
-            {% endif%}
+        {% if sourceName %}
+        Viewing edge between {{ sourceName }} and {{ targetName }}
+        {% elif nodeName %}
+        Viewing {{ nodeName }}
         {% else %}
-            Interact with graph to view statistics
+        Interact with graph to view statistics
+        {% endif%}
+        {% else %}
+        Interact with graph to view statistics
         {% endif %}
     </h1>
 
     {% if nodeName %}
-             
-    <div class="card" id="userDetails" style = "color: black;">
-                    <div class="card-header">
-                        Features
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" id="name_key"></li>
-                        <li class="list-group-item" id="weight_key"></li>
-                        <li class="list-group-item" id="neighbour_count_key"></li>
-                        <li class="list-group-item" id="clustering_coefficient_key"></li>
-                        <li class="list-group-item" id="eccentricity_key"></li>
-                        <li class="list-group-item" id="average_path_distance_key"></li>
-                    </ul>
-                </div>
-        {% endif %}
+
+    <div class="card" id="userDetails" style="color: black;">
+        <div class="card-header">
+            Features
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" id="name_key"></li>
+            <li class="list-group-item" id="weight_key"></li>
+            <li class="list-group-item" id="neighbour_count_key"></li>
+            <li class="list-group-item" id="clustering_coefficient_key"></li>
+            <li class="list-group-item" id="eccentricity_key"></li>
+            <li class="list-group-item" id="average_path_distance_key"></li>
+            <li class="list-group-item" id="page_rank_key"></li>
+        </ul>
+    </div>
+    {% endif %}
     <script>
 
         // d3.json("j", function (json){
@@ -85,12 +92,15 @@
         function wordCloud(selector) {
 
             var fill = d3.scale.category20();
+            let translateString = "translate(" + (parent.document.body.clientWidth * 0.4) + "," + (parent.document.body.clientHeight * 0.4) + ")"
+            console.log(translateString)
             //Construct the word cloud's SVG element
             var svg = d3.select(selector).append("svg")
-                .attr("width", 500)
-                .attr("height", 500)
+                .attr("width", parent.document.body.clientWidth * 0.8)
+                .attr("height", parent.document.body.clientHeight * 0.8)
                 .append("g")
-                .attr("transform", "translate(250,250)");
+
+                .attr("transform", translateString);
 
             //Draw the word cloud
             function draw(words) {
@@ -135,7 +145,7 @@
                 //The outside world will need to call this function, so make it part
                 // of the wordCloud return value.
                 update: function (words) {
-                    d3.layout.cloud().size([500, 500])
+                    d3.layout.cloud().size([parent.document.body.clientWidth * 0.8, parent.document.body.clientHeight * 0.8])
                         .words(words)
                         .padding(5)
                         .rotate(function () { return ~~(Math.random() * 2) * 90; })
@@ -150,22 +160,23 @@
 
         userId = "{{nodeId|safe}}";
         console.log(userId);
-        d3.json("details?link="+"{{nodeId|safe}}", function (details) {
+        d3.json("details?link=" + "{{nodeId|safe}}", function (details) {
             console.log(details.name);
             // alert(JSON.stringify(details))
-            document.getElementById("name_key").innerHTML  ="Email: " + details.name;
-            document.getElementById("weight_key").innerHTML  = "Weight: " +details.weight;
-            document.getElementById("neighbour_count_key").innerHTML  = "Neighbour Count: " + details.neighbours;
-            document.getElementById("clustering_coefficient_key").innerHTML  = "Local Clustering Coefficient: " + details.clustering_coefficient;
-            document.getElementById("eccentricity_key").innerHTML  = "Eccentricity: " + details.eccentricity;
-            document.getElementById("average_path_distance_key").innerHTML  = "Average Path Distance: " + details.average_path_distance;
+            document.getElementById("name_key").innerHTML = "Email: " + details.name;
+            document.getElementById("weight_key").innerHTML = "Weight: " + details.weight;
+            document.getElementById("neighbour_count_key").innerHTML = "Neighbour Count: " + details.neighbours;
+            document.getElementById("clustering_coefficient_key").innerHTML = "Local Clustering Coefficient: " + details.clustering_coefficient;
+            document.getElementById("eccentricity_key").innerHTML = "Eccentricity: " + details.eccentricity;
+            document.getElementById("average_path_distance_key").innerHTML = "Average Path Distance: " + details.average_path_distance;
+            document.getElementById("page_rank_key").innerHTML = "Page Rank: " + details.page_rank;
         });
 
 
         var data = [];
-        
+
         path = "{{json_path|safe}}"
-        console.log( )
+        console.log()
         d3.json(path, function (dataset) {
             var size = dataset;
             for (var i = 0; i < dataset.length; i++) {
@@ -173,17 +184,14 @@
             }
 
             var words = data.join(" ");
-
+            console.log(words);
             //Prepare one of the sample sentences by removing punctuation,
             // creating an array of words and computing a random size attribute.
             function getWords(i) {
-                
-                
-               
                 return words
                     .split(' ')
                     .map(function (d) {
-                        return { text: d, size: (dataset[getsize(d)].size*5) };
+                        return { text: d, size: (dataset[getsize(d)].size) };
                     })
 
             }
@@ -195,17 +203,14 @@
             //This method tells the word cloud to redraw with a new set of words.
             //In reality the new words would probably come from a server request,
             // user input or some other source.
-            function showNewWords(vis, i) {
-                i = i || 0;
-
-                console.log(i++ );
-
-                vis.update(getWords(200))
+            function showNewWords(vis) {
+                vis.update(getWords(10))
             }
             //Create a new instance of the word cloud visualisation.
             var myWordCloud = wordCloud('body');
 
             //Start cycling through the demo data
+            console.log(getWords(10))
             showNewWords(myWordCloud);
             // console.log(myJson);
         });

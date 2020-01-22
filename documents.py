@@ -29,13 +29,13 @@ user_ids = {name: data[name]["id"] for name in data}
 #   document['AB'] = { one } union { two }
 documents = {}
 counter = 0
-print(f"Total users pairs: {total_user_pairs} =>       ",  end="")
+print(f"Total users pairs: {total_user_pairs} =>             ",  end="")
 
 for user_pair in distinct_user_pairs:
     # counter output
     counter += 1
-    print('\b\b\b\b\b\b', end="", flush=True)
-    print("{:6}".format(counter), end="")
+    print('\b\b\b\b\b\b\b\b\b\b\b\b', end="", flush=True)
+    print("{:12}".format(counter), end="")
 
     # find common emails in sent and received and union the two
     common_emails = \
@@ -51,7 +51,7 @@ print("\nWriting edges.json")
 with open("output_json/edges.json", "w") as output:
     print(json_dumps(documents), file=output)
 
-print("\nWriting graph.json")
+print("Writing graph.json")
 with open("output_json/graph.json", "w") as output:
     print(json_dumps({
         "users": [
