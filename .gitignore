@@ -138,3 +138,12 @@ daoldold/
 maildir/
 *.zip
 old_msgs/
+andrewNerd.py
+
+all_Test/
+output/
+stemmedOutput/
+anotherStemmer/
+anotherStemmer2/
+
+*.json
