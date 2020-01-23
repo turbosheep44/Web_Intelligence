@@ -1,7 +1,9 @@
 # Running the Program
 
+To create the data folders from scratch, run the script `big.sh` or `small.sh`. Then open the server with `python3 server.py`. 
+
 Order of stuff:
- - `text.py` (extract metadata and separate body)
+ - `parsingStage{All}.py [output unstemmed folder] [output metadata]` (extract metadata and separate body)
  - `stemmer.py [input directory] [output directory]` (clean email bodies)
  - `filter.py [input json] [output json (metadata)]` (filter any unwanted users and give a numerical ID to each user)
  - `documents.py [metadata json input] [output folder]` (creates documents for each distinct user pair)
@@ -13,7 +15,7 @@ Order of stuff:
 
 # Files
 
-`graph.json`: data for gabriele d3 & used by `graph_faxxx.py`
+`graph.json`: data for gabriele d3 & used by `graph_facts.py`
 
 `node_data/{id}.json` : information about a particular node
 `tf_idf_nodes/{id}.json` : TF.IDF data for a word cloud for this node

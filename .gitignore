@@ -134,6 +134,10 @@ sample files/
 messages/
 messages_big/
 messages_fancy_filter/
+largeUnstemmed/
+messages_small/
+output_unstemmed_big/
+output_unstemmed_small/
 
 *.json
 maildir/
