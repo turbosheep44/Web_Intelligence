@@ -19,7 +19,7 @@ d3.json("graphStats", function (dataset) {
 
 
 // load data nto arrays from email.json
-    d3.json("j", function (dataset) {
+d3.json("graph", function (dataset) {
     var users = dataset.users,
         edges = dataset.edges;
 

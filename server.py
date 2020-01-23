@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def dashboardPost():
-    global pathModifier
+
     postRequest = request.form
     source = postRequest['source']
 
@@ -48,9 +48,8 @@ def getEdge():
     return render_template('keywordCloud.html', json_path=json_path, sourceName=sourceName, targetName=targetName)
 
 
-@app.route('/j')
-def j():
-    print(pathModifier, "at j")
+@app.route('/graph')
+def graph():
     return app.send_static_file(pathModifier + 'graph.json')
 
 
@@ -102,5 +101,7 @@ def add_header(r):
 
 
 if __name__ == '__main__':
+    global pathModifier
+    pathModifier = 'output_json_small/'
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run()

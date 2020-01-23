@@ -4,6 +4,7 @@ In order to install the correct dependencies in a virtual environment use the fo
 
 ```
  $ python3 -m venv env
+ $ source env/bin/activate
  $ pip install -r requirements.txt
 ```
 
