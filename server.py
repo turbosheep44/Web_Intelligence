@@ -25,6 +25,11 @@ def dashboard():
     return render_template("dashboard.html", active="small")
 
 
+@app.route('/placeholder')
+def pgaeholder():
+    return render_template("placeholder_page.html")
+
+
 @app.route('/node', methods=['GET'] )
 def getNode():
     nodeId = request.args.get('id')
