@@ -8,7 +8,7 @@ var graphSelection = d3.select("#getReq").append("svg")
     })).append("g");
 
 
-var c10 = d3.scale.category20b();
+var c20 = d3.scale.category20b();
 
 d3.json("graphStats", function (dataset) {
     document.getElementById("node_count").innerHTML = "Node Count: " + dataset.node_count;
@@ -76,15 +76,8 @@ d3.json("j", function (dataset) {
 
         })
 
-
-    function fmpurl() {
-        var url = '/';
-        window.location = url;
-    }
-
-
     colour_index = 0;
-    var circle = nodes.append("circle").attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5) }).attr("fill", function (_) { colour_index++; return c10(colour_index % 20); })
+    var circle = nodes.append("circle").attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5) }).attr("fill", function (_) { colour_index++; return c20(colour_index % 20); })
         .on("mouseover", function (d) {
             d3.select(this).transition()
                 .duration(500).attr("r", function (d) { return Math.pow(d.contact, 1 / 2.5) * 1.5 });
