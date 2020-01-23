@@ -2,6 +2,7 @@ from stemming.porter2 import stem
 import re
 import os
 from os import listdir
+import sys
 from os.path import isfile, join
 
 stopList = {}
@@ -20,20 +21,28 @@ def removeStopwordsAndStem(rootDir,file):
                     if(len(ts) > 0 ):
                         output += str(stem(ts)) + " "
                 
-        fileOut = open ('output_dir/'+file, 'w+')
+        fileOut = open (outputFolder + '/'+file, 'w+')
         fileOut.write(output)
         fileOut.close()
-
  
-lines = os.listdir("input_dir/")
-counter = 0
-for line in lines:
-    h = line.replace("/", "").replace("\n", "")
-    removeStopwordsAndStem("input_dir/",h)
-    print("File No + " + str(counter))
-    counter += 1
-
+global inputFolder
+global outputFolder
         
- #needs params
-#  argument for input directory
-#  argument for output directory
+if __name__ == "__main__":
+    fullCmdArguments = sys.argv
+    argumentList = fullCmdArguments[1:]
+    inputFolder = argumentList[0]
+    outputFolder = argumentList[1]
+
+    print( argumentList)
+
+    if(len(argumentList) == 2):
+        lines = os.listdir(inputFolder+'/')
+        counter = 0
+        for line in lines:
+            h = line.replace("/", "").replace("\n", "")
+            removeStopwordsAndStem(inputFolder+'/',h)
+            print("File No + " + str(counter))
+            counter += 1
+    else:
+        print("NOt working")

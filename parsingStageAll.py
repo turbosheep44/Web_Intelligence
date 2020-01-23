@@ -6,6 +6,11 @@ import json
 import sys
 
 
+# assumes the directory data exists and contains all the emails
+
+# outputs email message data to folder called largeUnstemmed
+# outputs json containing references to original_metadata_big
+
 def toEmailAdder(headerLine):
     returnList = headerLine.replace('<.', "").replace(">", "").replace(",", "").split(" ")[1:]
     pattern = re.compile("\w[\w.]*\w@[\w.]*")
