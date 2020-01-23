@@ -1,9 +1,9 @@
 from json import dumps as json_dumps
 from json import load as load_json
-
+from sys import argv as cmd_args
 
 # read the metadata json file
-with open('original_metadata.json') as json_file:
+with open(cmd_args[1]) as json_file:
     data = load_json(json_file)
 
 # remove all those whose weight is not in the top 150
@@ -25,5 +25,5 @@ for index, name in enumerate(data.keys()):
 
 
 # re-write metadata file
-with open('metadata.json', 'w') as json_file:
+with open(cmd_args[2], 'w') as json_file:
     print(json_dumps(data), file=json_file)

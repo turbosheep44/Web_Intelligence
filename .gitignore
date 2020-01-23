@@ -132,6 +132,7 @@ dmypy.json
 data/
 sample files/
 messages/
+messages_big/
 messages_fancy_filter/
 
 *.json
