@@ -23,4 +23,4 @@ python3 tf_idf.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER $OUTPUT_STEMMED
 python3 pagerank.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER
 python3 alias_data.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER
 
-mv $OUTPUT_FOLDER "static/output_json_small"
+mv $OUTPUT_FOLDER "static/output_json_filter"
