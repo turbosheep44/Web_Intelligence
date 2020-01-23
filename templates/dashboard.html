@@ -36,6 +36,66 @@
 </head>
 
 <body>
+    <style>
+
+        body {
+            font: Arial 12px;
+            text-align: center;
+        }
+
+        .link {
+            stroke: rgba(204, 204, 204, 0.360);
+
+        }
+
+
+        .node text {
+            pointer-events: none;
+            font: sans-serif;
+        }
+
+        #userDetails {
+            bottom: 0;
+            right: 0;
+            margin: 1% 7% 1% 10px;
+            width: 15vw;
+            z-index: 5;
+            position: fixed;
+        }
+
+        #graphDetails {
+            top: 0;
+            right: 0;
+            margin: 1% 7% 1% 10px;
+            width: 15vw;
+            z-index: 4;
+            position: fixed;
+        }
+
+        #getReq {
+            width: 100%;
+            height: 100%;
+            background-color: #1a2433;
+            color: white;
+        }
+
+        .list-group {
+            text-align: left;
+        }
+
+        #mainPage {
+            width: 100%;
+            height: 100%;
+            background-color: #1a2433;
+            color: white;
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            background-color: black;
+            WIDTH: 4%;
+        }
+    </style>
 
 
     <div id="myCarousel" class="carousel slide" data-interval="false">
@@ -47,8 +107,22 @@
                         <h1><b>Web Intelligence</b></h1> <br />
                         <h2>Michael Pulis, Matthew Axisa, Gabriele Borg</h2> <br />
 
-                    </div>
+                        <p1> Select which dataset should be used </p1> <br>
+                        <form action="" method="post" id ='sourceForm'>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons" >
 
+                                <label name="source"  value = "big"  class='btn btn-secondary  {% if active == "big" %} active {% endif %}' style="outline:none;" {% if active == "big" %} checked {% endif %} onclick="document.getElementById('hiddenPost').value='big'; document.getElementById('sourceForm').submit();">
+                                <input type="radio" id="large" autocomplete="off" > Large Dataset (65k People - 278k Emails)
+                                </label>
+
+                                <label  name="source" value = "small"  class='btn btn-secondary  {% if active == "small" %} active {% endif %}' style="outline:none;" checked  {% if active == "small" %} checked {% endif %}  onclick="document.getElementById('hiddenPost').value='small'; document.getElementById('sourceForm').submit();">
+                                <input type="radio" id="filtered" autocomplete="off" > Filtered Dataset (156 People - 35k Emails)
+                                </label>    
+                          </div>
+
+                          <input id='hiddenPost'  type="hidden" name="source" value="big" />
+                        </form>
+                    </div>
                 </div>
             </div>
 

@@ -7,7 +7,6 @@ var graphSelection = d3.select("#getReq").append("svg")
         graphSelection.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")")
     })).append("g");
 
-
 var c20 = d3.scale.category20b();
 
 d3.json("graphStats", function (dataset) {
@@ -19,14 +18,10 @@ d3.json("graphStats", function (dataset) {
 });
 
 
-
 // load data nto arrays from email.json
-d3.json("j", function (dataset) {
+    d3.json("j", function (dataset) {
     var users = dataset.users,
         edges = dataset.edges;
-
-    console.log(users);
-    console.log(dataset);
 
     var force = d3.layout.force().size([document.body.clientWidth, document.body.clientHeight]).nodes(users).links(edges).gravity(1).charge(-7000).linkDistance(200);
 
