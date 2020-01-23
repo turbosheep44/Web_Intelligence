@@ -9,8 +9,6 @@
 
     <script src="https://d3js.org/d3.v3.min.js"></script>
 
-    <link rel="stylesheet" href="main.css">
-
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -32,71 +30,10 @@
 
 
 
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/main.css")}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
 </head>
 
 <body>
-    <style>
-
-        body {
-            font: Arial 12px;
-            text-align: center;
-        }
-
-        .link {
-            stroke: rgba(204, 204, 204, 0.360);
-
-        }
-
-
-        .node text {
-            pointer-events: none;
-            font: sans-serif;
-        }
-
-        #userDetails {
-            bottom: 0;
-            right: 0;
-            margin: 1% 7% 1% 10px;
-            width: 15vw;
-            z-index: 5;
-            position: fixed;
-        }
-
-        #graphDetails {
-            top: 0;
-            right: 0;
-            margin: 1% 7% 1% 10px;
-            width: 15vw;
-            z-index: 4;
-            position: fixed;
-        }
-
-        #getReq {
-            width: 100%;
-            height: 100%;
-            background-color: #1a2433;
-            color: white;
-        }
-
-        .list-group {
-            text-align: left;
-        }
-
-        #mainPage {
-            width: 100%;
-            height: 100%;
-            background-color: #1a2433;
-            color: white;
-        }
-
-        .carousel-control-next,
-        .carousel-control-prev {
-            background-color: black;
-            WIDTH: 4%;
-        }
-    </style>
-
 
     <div id="myCarousel" class="carousel slide" data-interval="false">
         <div class="carousel-inner">
@@ -130,7 +67,7 @@
             <div id="getReq" class="carousel-item">
                 <script src="{{ url_for('static', filename='js/graph.js')}}"></script>
 
-                <div class="card" id="graphDetails" style="color: black;">
+                <div class="card" id="graphDetails">
                     <div class="card-header">
                         Features
                     </div>
@@ -143,7 +80,7 @@
                     </ul>
                 </div>
 
-                <div class="card" id="userDetails" style="color: black;">
+                <div class="card" id="userDetails">
                     <div class="card-header">
                         Features
                     </div>
@@ -159,8 +96,7 @@
                 </div>
             </div>
 
-            <div id="showEdges" class="carousel-item"
-                style="background-color: #22262e;  color: white; text-align: center;">
+            <div id="showEdges" class="carousel-item">
 
                 <iframe id="iframe" width="100%" height="100%" src="\placeholder"></iframe>
 

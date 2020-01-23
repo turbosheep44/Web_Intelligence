@@ -4,53 +4,17 @@
 
 <head>
     <title>Word Cloud Example</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+
     <script src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/d3.layout.cloud.js') }}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<style>
-    body {
-        font-family: "Lucida Grande", "Droid Sans", Arial, Helvetica, sans-serif;
-        text-align: center;
-        background-color: #22262e;
-    }
 
-    .legend {
-        border: 1px solid #555555;
-        border-radius: 5px 5px 5px 5px;
-        font-size: 0.8em;
-        margin: 10px;
-        padding: 8px;
-    }
 
-    .bld {
-        font-weight: bold;
-    }
-
-    svg {
-        margin-top: 5%;
-    }
-
-    #userDetails {
-        bottom: 0;
-        right: 0;
-        margin: 1% 7% 1% 10px;
-        width: 15vw;
-        z-index: 5;
-        position: fixed;
-    }
-
-    .list-group {
-        text-align: left;
-    }
-
-    #myheader {
-        margin-top: 1%;
-    }
-</style>
-
-<body>
+<body style="text-align:center">
     <h1 id='myheader' style="color:white">
         {% if json_path %}
         {% if sourceName %}
@@ -67,7 +31,7 @@
 
     {% if nodeName %}
 
-    <div class="card" id="userDetails" style="color: black;">
+    <div class="card" id="userDetails">
         <div class="card-header">
             Features
         </div>
@@ -99,7 +63,6 @@
                 .attr("width", parent.document.body.clientWidth * 0.8)
                 .attr("height", parent.document.body.clientHeight * 0.8)
                 .append("g")
-
                 .attr("transform", translateString);
 
             //Draw the word cloud
