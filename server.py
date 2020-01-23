@@ -1,21 +1,17 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
-
 @app.route('/' , methods=['POST'])
 def dashboardPost():
     global pathModifier
     postRequest = request.form
     source = postRequest['source']
-    print ("received: " + source)
 
     if source == 'big':
         pathModifier = 'output_json_big/'
         active="big"
     else:
-        print("hellooo im doing this this this this")
         pathModifier = 'output_json_filter/'
-        print(pathModifier)
         active="small"
 
     return render_template("dashboard.html", active=active)
@@ -24,11 +20,9 @@ def dashboardPost():
 def dashboard():
     return render_template("dashboard.html", active="small")
 
-
 @app.route('/placeholder')
 def pgaeholder():
     return render_template("placeholder_page.html")
-
 
 @app.route('/node', methods=['GET'] )
 def getNode():
@@ -47,15 +41,6 @@ def getEdge():
     targetName = request.args.get('targetName')
     json_path = "tfidfEdge?source=" + source + "&target="+target
     return render_template('keywordCloud.html', json_path = json_path, sourceName=sourceName, targetName=targetName)
-
-@app.route('/smallLoad')
-def smallLoad():
-    return app.send_static_file('output_json_filter/graph.json')
-
-@app.route('/bigLoad')
-def bigLoad():
-    return app.send_static_file('output_json_big/graph.json')
-
 
 @app.route('/j')
 def j():
@@ -96,8 +81,6 @@ def mroot():
 def noderoot():
     nodeId = request.args.get('id')
     return app.send_static_file(pathModifier+ 'tf_idf_nodes/'+nodeId+'.json')
-
-
 
 @app.after_request
 def add_header(r):
