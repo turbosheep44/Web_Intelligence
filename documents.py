@@ -3,6 +3,7 @@ from json import dumps as json_dumps
 from json import load as load_json
 from collections import deque
 from ast import literal_eval
+from sys import argv as cmd_args
 
 
 # list intersect
@@ -13,7 +14,7 @@ def intersect(listA, listB):
 
 
 # read the metadata json file
-with open('metadata.json') as json_file:
+with open(cmd_args[1]) as json_file:
     data = load_json(json_file)
 
 # get a list of all the distinct user pairs
@@ -48,11 +49,11 @@ for user_pair in distinct_user_pairs:
                   str(user_ids[user_pair[1]]) + ")"] = common_emails
 
 print("\nWriting edges.json")
-with open("output_json/edges.json", "w") as output:
+with open(f"{cmd_args[2]}/edges.json", "w") as output:
     print(json_dumps(documents), file=output)
 
 print("Writing graph.json")
-with open("output_json/graph.json", "w") as output:
+with open(f"{cmd_args[2]}/graph.json", "w") as output:
     print(json_dumps({
         "users": [
             {

@@ -3,6 +3,7 @@ from json import load as load_json
 from ast import literal_eval
 from os import makedirs, path
 from math import log
+from sys import argv as cmd_args
 
 
 # given the term by document matrix and a document to search ('searchDoc'),
@@ -59,7 +60,7 @@ def generate_term_by_document_matrix(documents):
     for document in documents:
         current_document = {}
         for filename in documents[document]:
-            with open("messages/" + filename, "r") as f:
+            with open(f"{cmd_args[3]}/" + filename, "r") as f:
                 for line in f:
                     for word in line.strip().split(" "):
                         word = word.strip()
@@ -111,13 +112,13 @@ def tf_idf(input_file, output_directory, conversion_function, output_file_name_f
 
 if __name__ == "__main__":
     print("Nodes TF.IDF")
-    tf_idf("metadata.json",
-           "output_json/tf_idf_nodes/",
+    tf_idf(f"{cmd_args[1]}",
+           f"{cmd_args[2]}/tf_idf_nodes/",
            lambda key, value: (value["id"],
                                set(value["sent"] + value["received"])),
            lambda key: key)
     print("Edges TF.IDF")
-    tf_idf("output_json/edges.json",
-           "output_json/tf_idf_edges/",
+    tf_idf(f"{cmd_args[2]}/edges.json",
+           f"{cmd_args[2]}/tf_idf_edges/",
            lambda key, value: (frozenset(literal_eval(key)), value),
            lambda key: '_'.join(str(user_id) for user_id in sorted(key)))

@@ -1,6 +1,7 @@
 
 from json import load as load_json
 from json import dumps as json_dumps
+from sys import argv as cmd_args
 
 
 def print_m(m):
@@ -9,7 +10,7 @@ def print_m(m):
 
 
 # read metadata
-with open("metadata.json", "r") as input_file:
+with open(f"{cmd_args[1]}", "r") as input_file:
     data = load_json(input_file)
 
 # construct the matrix of links
@@ -78,17 +79,17 @@ print(f"Total pagerank [{sum(rank)}]")
 
 # output pagerank data
 rank_dict = {index: value for index, value in enumerate(rank)}
-with open("output_json/pagerank.json", "w") as pagerank_output_file:
+with open(f"{cmd_args[1]}/pagerank.json", "w") as pagerank_output_file:
     print(json_dumps(rank_dict), file=pagerank_output_file)
 
 # for each person, output to their node_data file their pagerank score
 rank.sort(reverse=True)
 for person_id in rank_dict:
-    with open(f"output_json/node_data/{person_id}.json", "r") as person_data_file:
+    with open(f"{cmd_args[1]}/node_data/{person_id}.json", "r") as person_data_file:
         person_data = load_json(person_data_file)
     # add one because indices are zero-based
     person_data["page_rank"] = rank.index(rank_dict[person_id]) + 1
 
     # rewrite the file
-    with open(f"output_json/node_data/{person_id}.json", "w") as person_data_file:
+    with open(f"{cmd_args[1]}/node_data/{person_id}.json", "w") as person_data_file:
         print(json_dumps(person_data), file=person_data_file)

@@ -2,13 +2,13 @@
 
 Order of stuff:
  - `text.py` (extract metadata and separate body)
- - `stemmer.py` (clean email bodies)
- - `filter.py` (filter any unwanted users and give a numerical ID to each user)
- - `documents.py` (creates documents for each distinct user pair)
- - `graph_faxxx.py` (gets all the facts about graph and nodes)
- - `tf_idf.py` (gets all the node and edge word cloud data)
- - `pagerank.py` (calculates pagerank data for each node and saves it)
- - `alias_data.py` (adds alias data to the node data files)
+ - `stemmer.py [input directory] [output directory]` (clean email bodies)
+ - `filter.py [input json] [output json (metadata)]` (filter any unwanted users and give a numerical ID to each user)
+ - `documents.py [metadata json input] [output folder]` (creates documents for each distinct user pair)
+ - `graph_facts.py [input/output folder]` (gets all the facts about graph and nodes)
+ - `tf_idf.py [metadata json input] [input/output folder] [messages directory]` (gets all the node and edge word cloud data)
+ - `pagerank.py [metadata json input] [input/output folder]` (calculates pagerank data for each node and saves it)
+ - `alias_data.py [metadata json input] [input/output folder]` (adds alias data to the node data files - only applicable for filtered data set)
  - `server.py` (serve the web dashboard)
 
 # Files
