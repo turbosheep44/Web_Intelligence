@@ -1,8 +1,8 @@
 # Running the Program
 
-To create the data folders from scratch, run the script `big.sh` or `small.sh`. Then open the server with `python3 server.py`. 
+To create the data folders from scratch, run the script `big.sh` or `small.sh`. It is assumed that the maildir exists in the same folder as the scripts - this folder should be named `data`. Then open the server with `python3 server.py`. Nothing will work without the correct dependencies which can be installed from the `requirements.txt` file.
 
-Order of stuff:
+Order of scripts:
  - `parsingStage{All}.py [output unstemmed folder] [output metadata]` (extract metadata and separate body)
  - `stemmer.py [input directory] [output directory]` (clean email bodies)
  - `filter.py [input json] [output json (metadata)]` (filter any unwanted users and give a numerical ID to each user)
@@ -15,7 +15,7 @@ Order of stuff:
 
 # Files
 
-`graph.json`: data for gabriele d3 & used by `graph_facts.py`
+`graph.json`: data for D3 & used by `graph_facts.py`
 
 `node_data/{id}.json` : information about a particular node
 `tf_idf_nodes/{id}.json` : TF.IDF data for a word cloud for this node
