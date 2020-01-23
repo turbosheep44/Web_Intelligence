@@ -12,6 +12,11 @@ import math
 import itertools
 import numpy as np
 
+# assumes the directory data exists and contains all the emails
+
+# outputs email message data to folder called smallUnstemmed
+# outputs json containing references to original_metadata_small
+# outputs json used internally to accepted_emails.json
 
 # Partitions the email into three sections, to, from and the email, data based on flags passed as arguments
 def partitionEmail(path, toflag, fromflag, dataflag):
@@ -169,7 +174,7 @@ def string_dist(s1, s2):
         emailSplit = s1.split(".")
         for emailPart in emailSplit:
             m1m = levenshtein(emailPart, s2)
-                minimum = min(minimum, m1m)
+            minimum = min(minimum, m1m)
     else:
         minimum = levenshtein(s1, s2)
     return minimum
