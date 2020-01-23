@@ -110,7 +110,7 @@ def parseSaveMessage(path):
     if(fromEmail in acceptedEmails and len(aList) > 0):
         refName = path.replace("/", "") + "H"           
         
-        saveFile = open('smallUnstemmed/'+ refName, 'w')
+        saveFile = open('output/'+ refName, 'w')
         message = data.replace('\n',  ' ')
         parsed_msg = message.lower()
         parsed_msg = re.sub('\s+',' ',parsed_msg)
@@ -168,8 +168,10 @@ def string_dist(s1, s2):
     if("." in s1):
         emailSplit = s1.split(".")
         for emailPart in emailSplit:
+            # print('between ' + emailPart + ' and  '+ s2)
             m1m = levenshtein(emailPart, s2)
-                minimum = min(minimum, m1m)
+            # print(minimum , ' and ' , m1m)
+            minimum = min(minimum, m1m)
     else:
         minimum = levenshtein(s1, s2)
     return minimum
@@ -219,12 +221,15 @@ if __name__ == "__main__":
         sentList = ['sent', '_sent_mail', 'sent_items']
         notPaired = {}
         pairedCount = {}
+        # acceptedPaths = []
         alias_data = {}
         total = 0
         acceptedEmails = set()
         inverseAccepted = {}
         dirs = os.listdir('data/')
         for folder in dirs:
+            # print(folder)
+            # personslist = []
             best = ""
             bestL = math.inf
             strippedsurname = folder.split('-')[0]
@@ -234,6 +239,8 @@ if __name__ == "__main__":
                     if(os.path.isdir('data/'+folder+'/'+os.listdir('data/'+folder)[0]+'/' +s)):
                         folder += '/' +os.listdir('data/'+folder)[0]
                         subfolderused = True
+                    # acceptedPaths.append('data/'+folder+'/'+s)
+                    # personslist.append('data/'+folder+'/'+s)
                     files = os.listdir('data/'+folder+'/'+s)
                     for fileno in files:
                         if(not os.path.isdir('data/'+folder+'/'+s+'/'+fileno)):
@@ -284,6 +291,9 @@ if __name__ == "__main__":
                                         if(levD < bestL):
                                             best = item
                                             bestL = levD
+
+
+
                                 
                                 distinctEmails = {}
                         else:
@@ -341,5 +351,5 @@ if __name__ == "__main__":
 
         f =  json.dumps(users_data,sort_keys=True, indent=4)
 
-        with open("original_metadata_small.json", "w") as outFile:
+        with open("userData.json", "w") as outFile:
             outFile.write(f)
