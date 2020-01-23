@@ -353,6 +353,11 @@ if __name__ == "__main__":
                 addToFolder(key.partition("@")[0], key, False)
                 counter += 1
 
+        f = json.dumps(users_data, sort_keys=True, indent=4)
+
+        with open("accepted_emails_small.json", "w") as outFile:
+            outFile.write(acceptedEmails)
+
     else:
         with open('accepted_emails_small.json', 'r') as g:
             alias_data = json.load(g)

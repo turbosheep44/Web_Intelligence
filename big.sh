@@ -21,4 +21,4 @@ python3 graph_facts.py $OUTPUT_FOLDER
 python3 tf_idf.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER $OUTPUT_STEMMED
 python3 pagerank.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER
 
-mv $OUTPUT_FOLDER "static/output_json_big"
+mv $OUTPUT_FOLDER "static/"
