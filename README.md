@@ -1,8 +1,17 @@
+# Initialising the Environment
+
+In order to install the correct dependencies in a virtual environment use the following commands:
+
+```
+ $ python3 -m venv env
+ $ pip install -r requirements.txt
+```
+
 # Running the Program
 
-To create the data folders from scratch, run the script `big.sh` or `small.sh`. It is assumed that the maildir exists in the same folder as the scripts - this folder should be named `data`. Then open the server with `python3 server.py`. Nothing will work without the correct dependencies which can be installed from the `requirements.txt` file.
+To create the data folders from scratch, run the scripts `big.sh` and `small.sh`. It is assumed that the maildir exists in the same folder as the scripts - this folder should be named `data`. Then open the server with `python3 server.py`.
 
-Order of scripts:
+The scripts are run in the following forder to create the data:
  - `parsingStage{All}.py [output unstemmed folder] [output metadata]` (extract metadata and separate body)
  - `stemmer.py [input directory] [output directory]` (clean email bodies)
  - `filter.py [input json] [output json (metadata)]` (filter any unwanted users and give a numerical ID to each user)
