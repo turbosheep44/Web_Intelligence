@@ -11,8 +11,8 @@ python3 stemmer.py $OUTPUT_FOLDER_UNSTEMMED $OUTPUT_STEMMED
 
 ##########################
 
-OUTPUT_FOLDER="output_json_test"
-FILTERED_METADATA_JSON="metadata.json"
+OUTPUT_FOLDER="output_json_small"
+FILTERED_METADATA_JSON="metadata_small.json"
 
 mkdir -p $OUTPUT_FOLDER
 
@@ -23,3 +23,4 @@ python3 tf_idf.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER $OUTPUT_STEMMED
 python3 pagerank.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER
 python3 alias_data.py $FILTERED_METADATA_JSON $OUTPUT_FOLDER
 
+mv $OUTPUT_FOLDER "static/output_json_small"
